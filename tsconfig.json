@@ -6,7 +6,8 @@
         "lib": [
             "es2018"
         ],
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules",
