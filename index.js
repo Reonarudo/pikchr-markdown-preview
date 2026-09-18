@@ -18,20 +18,21 @@ const pikchr = (source) => {
 };
 exports.pikchr = pikchr;
 function markdownItPikchr(md) {
+    // Keep whatever fence renderer was registered before us (markdown-it's default, or another
+    // extension's, e.g. a gnuplot preview) and hand every fence we do not own back to it.
+    // Returning `token.content` here used to replace *all* other fences in the preview with
+    // their raw, unescaped text.
+    const original = md.renderer.rules.fence;
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
         const token = tokens[idx];
-        if (token.info.trim() === "pikchr") {
-            var result = (0, exports.pikchr)(token.content);
-            if (result.svg === undefined) {
-                return token.content;
-            }
-            else {
-                return result.svg;
-            }
+        if (token.info.trim() !== "pikchr") {
+            return original
+                ? original(tokens, idx, options, env, self)
+                : self.renderToken(tokens, idx, options);
         }
-        else {
-            return token.content;
-        }
+        const result = (0, exports.pikchr)(token.content);
+        // pikchr's own error report is HTML with the source already escaped and the fault marked.
+        return result.svg !== undefined ? result.svg : result.errorAsHtml;
     };
 }
 function activate(context) {
