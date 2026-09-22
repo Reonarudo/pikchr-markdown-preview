@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - Pikchr fences accept an attribute block: `alt` for an accessible name,
   `caption` for visible text beneath the diagram, `align` for placement, and
@@ -10,7 +10,7 @@
 - Unrecognised attributes are ignored rather than reported in the preview; see
   `docs/adr/0002-silently-ignore-unrecognised-fence-attributes.md`.
 
-## 0.1.0
+- Add an original diagram icon matching the Gnuplot extension’s visual family.
 
 First release maintained independently of
 [xuzn/pikchr-markdown-preview](https://github.com/xuzn/pikchr-markdown-preview).
