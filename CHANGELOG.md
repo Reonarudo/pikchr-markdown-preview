@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Use the distinct Marketplace display name **Pikchr Diagram Preview**.
+
 ## 0.1.1
 
 - Use the distinct Marketplace package name `pikchr-diagram-preview`; the original name was unavailable.

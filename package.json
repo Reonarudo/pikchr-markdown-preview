@@ -1,7 +1,7 @@
 {
   "name": "pikchr-diagram-preview",
-  "version": "0.1.1",
-  "displayName": "Pikchr Markdown Preview",
+  "version": "0.1.2",
+  "displayName": "Pikchr Diagram Preview",
   "description": "Adds Pikchr support to VS Code's built-in Markdown preview",
   "keywords": [
     "pikchr",
