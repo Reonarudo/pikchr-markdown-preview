@@ -1,45 +1,59 @@
 {
   "name": "pikchr-markdown-preview",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "displayName": "Pikchr Markdown Preview",
   "description": "Adds Pikchr support to VS Code's built-in Markdown preview",
   "keywords": [
     "pikchr",
     "railroad",
     "syntax",
-    "markdown"
+    "markdown",
+    "diagram",
+    "markdown-preview"
   ],
   "icon": "logo.jpg",
-  "publisher": "xuzn",
+  "publisher": "ReoX86",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/xuzn/pikchr-markdown-preview"
+    "type": "git",
+    "url": "https://github.com/Reonarudo/pikchr-markdown-preview.git"
   },
   "bugs": {
-    "url": "https://github.com/xuzn/pikchr-markdown-preview/issues"
+    "url": "https://github.com/Reonarudo/pikchr-markdown-preview/issues"
   },
+  "homepage": "https://github.com/Reonarudo/pikchr-markdown-preview#readme",
   "engines": {
-    "vscode": "^1.61.0"
+    "vscode": "^1.95.0",
+    "node": ">=22"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Visualization"
   ],
   "activationEvents": [],
+  "main": "./dist/extension.js",
   "contributes": {
     "markdown.markdownItPlugins": true
   },
-  "main": "./index.js",
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
-    "watch": "tsc -w -p ./"
+    "lint": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "build": "node scripts/build.mjs",
+    "vscode:prepublish": "npm run build",
+    "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
-    "@types/node": "^16.11.6",
-    "@types/vscode": "^1.61.0",
-    "@types/markdown-it": "^12.2.3",
-    "markdown-it": "^12.2.0",
-    "typescript": "^4.4.4"
+    "@types/markdown-it": "14.2.0",
+    "@types/node": "22.20.3",
+    "@types/vscode": "1.95.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "markdown-it": "15.0.2",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "@vscode/vsce-sign@2.1.0": true
   }
 }

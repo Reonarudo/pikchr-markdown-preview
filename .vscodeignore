@@ -1,0 +1,11 @@
+**
+!dist/**
+!vendor/pikchr/pikchr.js
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!example1.png
+!example2.png
+!logo.jpg

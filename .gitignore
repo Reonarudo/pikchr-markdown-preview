@@ -104,5 +104,7 @@ dist
 .tern-port
 yarn.lock
 .DS_Store
-package-lock.json
 *.vsix
+
+# Build output
+dist/
