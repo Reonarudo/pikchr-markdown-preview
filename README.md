@@ -2,6 +2,8 @@
 
 Adds Pikchr support to VS Code's built-in Markdown preview.
 
+Marketplace ID: `ReoX86.pikchr-diagram-preview`.
+
 ![A pikchr diagram in VS Code's built-in markdown preview](example1.png)
 
 ![A pikchr diagram in VS Code's built-in markdown preview](example2.png)

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Use the distinct Marketplace package name `pikchr-diagram-preview`; the original name was unavailable.
+
 ## 0.1.0
 
 - Pikchr fences accept an attribute block: `alt` for an accessible name,
@@ -18,7 +22,7 @@ First release maintained independently of
 - Non-pikchr fences are delegated to the previously registered fence renderer
   instead of being replaced by their raw text, so other Markdown preview
   extensions keep working in the same document.
-- Published under the `ReoX86` publisher.
+- Prepared for the `ReoX86` publisher.
 - Sources split into `src/`, the Pikchr compiler moved to `vendor/pikchr/`,
   and build output is produced by esbuild into `dist/` instead of being
   committed to the repository.
