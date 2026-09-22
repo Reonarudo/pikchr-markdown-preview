@@ -1,5 +1,6 @@
 **
 !dist/**
+!media/preview.css
 !vendor/pikchr/pikchr.js
 !package.json
 !README.md

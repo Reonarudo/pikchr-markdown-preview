@@ -46,6 +46,34 @@ Fences in any other language are left untouched and handed back to whichever
 renderer registered before this extension, so other Markdown preview
 extensions keep working in the same document.
 
+## Fence attributes
+
+A `pikchr` fence may carry an attribute block:
+
+~~~markdown
+```pikchr {alt="Sine curve" caption="Figure 1: Sine wave" align="center"}
+box "hi"
+```
+~~~
+
+- `alt` — an accessible name, for readers using assistive technology.
+- `caption` — plain text shown beneath the diagram.
+- `align` — `left`, `center` or `right`.
+- `class` — an extra CSS class on the `<svg>`, alongside the built-in
+  `pikchr` class.
+
+Values must be quoted, with single or double quotes; a backslash escapes a
+matching quote or a backslash. Attributes may appear in any order. Values are
+plain text — never Markdown or HTML.
+
+Anything unrecognised is ignored and the diagram still renders: an unknown
+attribute, an unknown alignment or a repeated key is dropped, and a malformed
+block is dropped whole. Nothing is reported in the preview; details go to the
+**Pikchr Markdown Preview** output channel. See
+[ADR 0002](docs/adr/0002-silently-ignore-unrecognised-fence-attributes.md).
+
+Bare `pikchr` fences continue to work unchanged.
+
 ## Development
 
 Requires Node 22 or newer (see `.nvmrc`).

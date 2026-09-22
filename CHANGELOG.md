@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Pikchr fences accept an attribute block: `alt` for an accessible name,
+  `caption` for visible text beneath the diagram, `align` for placement, and
+  `class` for an extra CSS class on the `<svg>`.
+- Diagrams now carry a `pikchr` class and are scaled down to fit the preview
+  column instead of overflowing it.
+- Unrecognised attributes are ignored rather than reported in the preview; see
+  `docs/adr/0002-silently-ignore-unrecognised-fence-attributes.md`.
+
 ## 0.1.0
 
 First release maintained independently of

@@ -1,0 +1,25 @@
+/* Scale a wide diagram down to the preview column instead of letting it overflow. */
+svg.pikchr {
+  max-width: 100%;
+  height: auto;
+}
+
+.pikchr-figure {
+  margin: 1em 0;
+}
+
+.pikchr-figure figcaption {
+  margin-top: .5em;
+}
+
+.pikchr-align-left {
+  text-align: left;
+}
+
+.pikchr-align-center {
+  text-align: center;
+}
+
+.pikchr-align-right {
+  text-align: right;
+}
