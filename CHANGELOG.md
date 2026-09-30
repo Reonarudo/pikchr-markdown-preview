@@ -15,8 +15,7 @@
   `class` for an extra CSS class on the `<svg>`.
 - Diagrams now carry a `pikchr` class and are scaled down to fit the preview
   column instead of overflowing it.
-- Unrecognised attributes are ignored rather than reported in the preview; see
-  `docs/adr/0002-silently-ignore-unrecognised-fence-attributes.md`.
+- Unrecognised attributes are ignored rather than reported in the preview.
 
 - Add an original diagram icon matching the Gnuplot extension’s visual family.
 

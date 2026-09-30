@@ -71,8 +71,7 @@ plain text — never Markdown or HTML.
 Anything unrecognised is ignored and the diagram still renders: an unknown
 attribute, an unknown alignment or a repeated key is dropped, and a malformed
 block is dropped whole. Nothing is reported in the preview; details go to the
-**Pikchr Markdown Preview** output channel. See
-[ADR 0002](docs/adr/0002-silently-ignore-unrecognised-fence-attributes.md).
+**Pikchr Markdown Preview** output channel.
 
 Bare `pikchr` fences continue to work unchanged.
 
