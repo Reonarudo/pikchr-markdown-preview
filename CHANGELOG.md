@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3
+
+- Security: a fence's `class` attribute could break out of the `<svg>` class
+  attribute and inject markup into the Markdown preview, because it was passed
+  to Pikchr, which writes it out unescaped. The class is now HTML-escaped and
+  added to the `<svg>` after compilation; Pikchr only ever sees the built-in
+  `pikchr` class.
+
 ## 0.1.2
 
 - Use the distinct Marketplace display name **Pikchr Diagram Preview**.
