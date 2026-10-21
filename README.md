@@ -75,20 +75,34 @@ block is dropped whole. Nothing is reported in the preview; details go to the
 
 Bare `pikchr` fences continue to work unchanged.
 
+## Errors and limits
+
+A fence that pikchr rejects shows the error and its line and column within the
+fence in place of the diagram. `print` output appears as text above the
+diagram. Each diagram has three seconds to render and a 64 000-character source
+limit; a fence that exceeds either shows an error instead, and the rest of the
+document still renders.
+
+Requires VS Code 1.101 or newer.
+
 ## Development
 
 Requires Node 22 or newer (see `.nvmrc`).
 
 ~~~sh
-npm install
-npm run lint     # tsc --noEmit
-npm test         # node --test
-npm run build    # esbuild src -> dist
-npm run package  # vsce package
+npm ci
+npm run lint          # tsc --noEmit
+npm test              # node --test
+npm run build         # esbuild src -> dist
+npm run package       # vsce package, with the renderer library under node_modules
+npm run test:package  # render fences in a real VS Code host from the packaged VSIX
 ~~~
 
-`vendor/pikchr/` holds the upstream Pikchr compiler and the WebAssembly build
-produced from it by `vendor/pikchr/pikchr.sh`; see `THIRD_PARTY_NOTICES.md`.
+Rendering is done by
+[pikchr-renderer](https://github.com/Reonarudo/pikchr-renderer), pinned to a
+release tarball in `package.json` (`.npmrc` sets `allow-remote=root` for npm 12).
+To take a new release, edit the URL (the version appears twice), run
+`npm install`, and commit `package.json` and `package-lock.json`.
 
 ## Credits
 

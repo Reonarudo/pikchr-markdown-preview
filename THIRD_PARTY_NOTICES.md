@@ -1,19 +1,27 @@
 # Third-party notices
 
-## Pikchr
+## Pikchr renderer
 
-`vendor/pikchr/` contains the Pikchr diagram compiler by D. Richard Hipp,
-obtained from <https://pikchr.org>.
+Diagrams are rendered by
+[pikchr-renderer](https://github.com/Reonarudo/pikchr-renderer) (MIT), shipped in
+this extension under `node_modules/@reonarudo/pikchr-renderer/`. It carries the
+Pikchr diagram compiler by D. Richard Hipp, from <https://pikchr.org>, compiled to
+WebAssembly with Emscripten. Its own `THIRD_PARTY_NOTICES.md` and `licenses/`
+directory give the engine's provenance and licenses:
 
-- `pikchr.c` — upstream source, re-synced from the Pikchr project.
-- `pikchr.js` — the same source compiled to WebAssembly by `pikchr.sh`.
-- `pikchr.md` — upstream language documentation.
+- Pikchr is distributed under the Zero-Clause BSD license, copyright (C)
+  2020-09-01 by D. Richard Hipp <drh@sqlite.org>:
 
-Pikchr is distributed under the Zero-Clause BSD license, copyright (C)
-2020-09-01 by D. Richard Hipp <drh@sqlite.org>:
+  > Permission to use, copy, modify, and/or distribute this software for
+  > any purpose with or without fee is hereby granted.
 
-> Permission to use, copy, modify, and/or distribute this software for
-> any purpose with or without fee is hereby granted.
+- The Emscripten runtime is available under the MIT and University of
+  Illinois/NCSA licenses.
+
+## xmldom
+
+[`@xmldom/xmldom`](https://github.com/xmldom/xmldom), used by the renderer's
+sanitizer, is shipped under `node_modules/@xmldom/xmldom/` with its MIT license.
 
 ## Origin of this extension
 

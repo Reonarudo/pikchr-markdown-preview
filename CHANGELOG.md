@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.2.0
+
+- Diagrams are now rendered by
+  [pikchr-renderer](https://github.com/Reonarudo/pikchr-renderer) 1.0.0, the
+  library the reonarudo.github.io site also uses, instead of a copy of Pikchr
+  inside the extension. Its Pikchr is pikchr.org trunk from 2026-04-03 rather
+  than a 2021 build: newer syntax such as `diamond` and `mono` works, and
+  coordinates can differ slightly from 0.1.x.
+- Each diagram renders in a worker with a three-second budget and a
+  64 000-character source limit, and its SVG is sanitized before it reaches the
+  preview. A runaway fence shows an error instead of freezing the preview.
+- Errors are shown as plain text with the line and column within the fence,
+  replacing Pikchr's HTML error report. `print` output appears as text above
+  the diagram.
+- Requires VS Code 1.101 or newer.
+- Includes the 0.1.3 fix below.
+
 ## 0.1.3
 
 - Security: a fence's `class` attribute could break out of the `<svg>` class

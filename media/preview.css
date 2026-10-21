@@ -23,3 +23,19 @@ svg.pikchr {
 .pikchr-align-right {
   text-align: right;
 }
+
+.pikchr-error {
+  border-left: 3px solid var(--vscode-editorWarning-foreground, #b58900);
+  padding: .5em 1em;
+  margin: 1em 0;
+}
+
+.pikchr-error pre {
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.pikchr-notes {
+  white-space: pre-wrap;
+  margin: 1em 0 .5em;
+}

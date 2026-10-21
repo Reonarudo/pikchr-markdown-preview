@@ -1,6 +1,6 @@
 import type MarkdownItConstructor from 'markdown-it';
 type MarkdownIt = InstanceType<typeof MarkdownItConstructor>;
-import type { PikchrResult } from './renderer';
+import type { RenderResult } from '@reonarudo/pikchr-renderer';
 import { parseAttributes, type FenceAttributes } from './attributes';
 
 /**
@@ -11,8 +11,42 @@ import { parseAttributes, type FenceAttributes } from './attributes';
  */
 const CLAIMED = /^pikchr(\s+\{|$)/;
 
-export type Render = (source: string, extraClass?: string) => PikchrResult;
+export type Render = (source: string) => RenderResult;
 export type Report = (message: string) => void;
+
+type Escape = (text: string) => string;
+
+/** The root of every diagram pikchr-renderer emits carries exactly this class. */
+const ROOT_CLASS = /^(<svg\b[^>]*?\sclass=")pikchr(")/;
+
+/**
+ * Append the author's class to the root's `pikchr` class rather than replacing it, so the
+ * stylesheet's sizing rules still apply. The library never sees it (it has no such input); it is
+ * escaped here because the preview does not sanitize.
+ */
+function addClass(svg: string, extraClass: string | undefined, escape: Escape): string {
+  return extraClass ? svg.replace(ROOT_CLASS, (_, open, close) => `${open}pikchr ${escape(extraClass)}${close}`) : svg;
+}
+
+function errorBlock(text: string, escape: Escape): string {
+  return `<div class="pikchr-error" role="alert"><pre>${escape(text)}</pre></div>\n`;
+}
+
+/** The library's plain-text result as the words shown in place of a diagram. */
+function describe(result: Exclude<RenderResult, { status: 'success' }>): string {
+  switch (result.status) {
+    case 'failure': {
+      const where = result.line === undefined
+        ? ''
+        : result.column === undefined ? ` at line ${result.line}` : ` at line ${result.line}, column ${result.column}`;
+      return `Pikchr error${where}: ${result.message}`;
+    }
+    case 'timeout':
+      return `Pikchr took longer than ${result.budget} ms; the diagram was not rendered.`;
+    case 'unavailable':
+      return `Pikchr is unavailable: ${result.reason}`;
+  }
+}
 
 function wrap(md: MarkdownIt, diagram: string, attributes: FenceAttributes): string {
   const escape = md.utils.escapeHtml;
@@ -56,12 +90,25 @@ export function markdownPlugin(md: MarkdownIt, render: Render, report: Report = 
     for (const diagnostic of diagnostics) {
       report(diagnostic);
     }
-    const result = render(token.content, attributes.class);
-    // Pikchr's own error report is HTML with the source already escaped and the fault marked.
-    if (result.svg === undefined) {
-      return result.errorAsHtml!;
+    const escape = md.utils.escapeHtml;
+    let result: RenderResult;
+    try {
+      result = render(token.content);
+    } catch (error) {
+      // The library throws only for programmer errors, but a throw here would remove the whole
+      // extension from the preview (see attributes.ts), so it degrades this fence alone.
+      const cause = error instanceof Error ? error.message : String(error);
+      report(`Pikchr render failed: ${cause}`);
+      return errorBlock(`Pikchr is unavailable: ${cause}`, escape);
     }
-    return wrap(md, result.svg, attributes);
+    if (result.status !== 'success') {
+      return errorBlock(describe(result), escape);
+    }
+    // `print` output, which pikchr itself wrote above the diagram.
+    const notes = result.notes.length
+      ? `<div class="pikchr-notes">${result.notes.map(escape).join('<br>')}</div>`
+      : '';
+    return notes + wrap(md, addClass(result.output, attributes.class, escape), attributes);
   };
   return md;
 }

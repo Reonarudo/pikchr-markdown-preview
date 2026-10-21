@@ -7,11 +7,10 @@ await build({
   outdir: 'dist',
   bundle: true,
   platform: 'node',
-  target: 'node20',
+  target: 'node22',
   format: 'cjs',
-  // `vscode` is provided by the host. The Emscripten module stays external and is shipped as
-  // `vendor/pikchr/pikchr.js`, so the same relative require resolves from `src/` in development
-  // and from `dist/` in the packaged extension.
-  external: ['vscode', '../vendor/pikchr/pikchr.js'],
+  // `vscode` is provided by the host. The renderer library is not bundled: it ships installed in
+  // the VSIX's `node_modules`, where its worker and engine sit where it expects them (ADR 0010).
+  external: ['vscode', '@reonarudo/pikchr-renderer'],
   sourcemap: false
 });

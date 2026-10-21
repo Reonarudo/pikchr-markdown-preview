@@ -112,3 +112,6 @@ dist/
 # Internal design docs (glossary, ADRs) stay off GitHub
 /CONTEXT.md
 /docs/adr/
+
+# VS Code downloaded by the host test
+.vscode-test/
