@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import MarkdownIt from 'markdown-it';
 import { createRuntime, type Runtime } from '@reonarudo/pikchr-renderer';
 import { markdownPlugin } from '../src/markdown';
+import { rendering } from './helpers';
 
 // These run the real library, to pin the glue's assumptions about its output. Rendering itself
 // is pikchr-renderer's to test.
@@ -15,7 +16,7 @@ const plugin = () => markdownPlugin(new MarkdownIt(), source => runtime.render({
 
 test('the fence class reaches the root of the library output, escaped', () => {
   const html = plugin().render(`\`\`\`pikchr {class='wide"><img src=x>'}\nbox\n\`\`\``);
-  assert.match(html, /^<svg [^>]*class="pikchr wide&quot;&gt;&lt;img src=x&gt;"[^>]*>/);
+  assert.match(rendering(html), /^<svg [^>]*class="pikchr wide&quot;&gt;&lt;img src=x&gt;"[^>]*>/);
   assert.doesNotMatch(html, /<img/);
 });
 

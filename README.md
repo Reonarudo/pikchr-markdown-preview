@@ -75,6 +75,15 @@ block is dropped whole. Nothing is reported in the preview; details go to the
 
 Bare `pikchr` fences continue to work unchanged.
 
+## Viewing the source
+
+Every diagram carries a small button in its top corner that flips the fence
+between the diagram and the fence's text, highlighted the way the preview shows
+any other code block. A flipped fence stays flipped while you edit the
+document, after *Markdown: Refresh Preview*, and when the preview is reopened;
+flip it back to see the diagram again. The button is a reader's control: a fence
+cannot be written to open in source view.
+
 ## Errors and limits
 
 A fence that pikchr rejects shows the error and its line and column within the
@@ -96,6 +105,7 @@ npm test              # node --test
 npm run build         # esbuild src -> dist
 npm run package       # vsce package, with the renderer library under node_modules
 npm run test:package  # render fences in a real VS Code host from the packaged VSIX
+npm run test:preview  # the view toggle in a live preview, through Playwright
 ~~~
 
 Rendering is done by

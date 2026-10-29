@@ -115,3 +115,6 @@ dist/
 
 # VS Code downloaded by the host test
 .vscode-test/
+
+# Written by scripts/test-preview.mjs when a live check fails
+test-preview-failure.png

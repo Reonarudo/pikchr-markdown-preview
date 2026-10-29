@@ -1,6 +1,7 @@
 **
 !dist/**
 !media/preview.css
+!media/preview.js
 !package.json
 !README.md
 !CHANGELOG.md
